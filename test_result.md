@@ -195,3 +195,5 @@
 ## agent_communication:
 ##     -agent: "main"
 ##     -message: "Run backend tests for /api/contact after EMAIL_ENABLED flag change; then run UI tests for contact submission and portfolio inline viewer."
+##     -agent: "testing"
+##     -message: "Backend testing completed successfully. POST /api/contact returns 201 with status='new' when EMAIL_ENABLED=false (default). All backend APIs working correctly. Ready for UI testing."
