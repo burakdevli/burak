@@ -190,7 +190,7 @@ export default function Home() {
       <section id="experience" className="max-w-6xl mx-auto px-4 py-6 md:py-10">
         <SectionHeader label="Deneyim" title="İş Tecrübeleri" />
         <div className="relative">
-          <div className="absolute left-4 md:left-1.5 top-0 bottom-0 w-px bg-blue-900/20" />
+          <div className="absolute left-4 md:left-1.5 top-0 bottom-0 w-1 bg-blue-900/30" />
           <div className="space-y-6">
             {EXPERIENCE.map((item, idx) => (
               <Card key={idx} className="relative rounded-none">
