@@ -2,9 +2,12 @@
 import { useState } from "react";
 import "./App.css";
 
+/** Statik varlık yolları (GitHub Pages alt dizini için güvenli) */
 const PHOTO = process.env.PUBLIC_URL + "/FGS_2955.jpg";
 const CV_URL = process.env.PUBLIC_URL + "/BURAK_DEVLI_CV.pdf";
+const PORTFOLIO_IMG = process.env.PUBLIC_URL + "/portfolyo-belgesi.jpg";
 
+/** ----------------------- NAVBAR ----------------------- */
 function Navbar() {
   const [open, setOpen] = useState(false);
   const links = [
@@ -21,9 +24,9 @@ function Navbar() {
       <div className="container nav-inner">
         <a href="#top" className="brand">Burak Devli</a>
 
-        {/* Desktop links */}
+        {/* Masaüstü bağlantıları */}
         <nav className="links">
-          {links.map(l => (
+          {links.map((l) => (
             <a key={l.href} href={l.href}>{l.label}</a>
           ))}
           <a className="btn btn-primary btn-small" href={CV_URL} download>
@@ -31,21 +34,17 @@ function Navbar() {
           </a>
         </nav>
 
-        {/* Mobile hamburger */}
-        <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Menu">
-          <span />
-          <span />
-          <span />
+        {/* Mobil hamburger */}
+        <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Menüyü aç/kapat">
+          <span /><span /><span />
         </button>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobil çekmece */}
       {open && (
         <div className="drawer">
-          {links.map(l => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
-              {l.label}
-            </a>
+          {links.map((l) => (
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
           ))}
           <a className="btn btn-primary drawer-btn" href={CV_URL} download onClick={() => setOpen(false)}>
             CV’yi indir
@@ -56,6 +55,7 @@ function Navbar() {
   );
 }
 
+/** ----------------------- HERO ----------------------- */
 function Hero() {
   return (
     <section id="top" className="hero container">
@@ -82,10 +82,9 @@ function Hero() {
   );
 }
 
-function Eyebrow({ children }) {
-  return <div className="eyebrow">{children}</div>;
-}
+const Eyebrow = ({ children }) => <div className="eyebrow">{children}</div>;
 
+/** ----------------------- HAKKIMDA + YETENEKLER ----------------------- */
 function About() {
   const skills = [
     { icon: "calendar", label: "Proje Yönetimi" },
@@ -102,6 +101,7 @@ function About() {
     <section id="about" className="container section">
       <Eyebrow>HAKKIMDA</Eyebrow>
       <h2>Profesyonel Özet</h2>
+
       <div className="card">
         <p>
           Takım çalışmasına yatkın, analitik düşünebilen ve saha tecrübesi yüksek bir makine mühendisiyim.
@@ -111,7 +111,7 @@ function About() {
       </div>
 
       <div className="skills-grid">
-        {skills.map(s => (
+        {skills.map((s) => (
           <div className="skill" key={s.label}>
             <span className={`ico ${s.icon}`} aria-hidden />
             <span>{s.label}</span>
@@ -122,6 +122,7 @@ function About() {
   );
 }
 
+/** ----------------------- DENEYİM (Zaman Çizelgesi) ----------------------- */
 function Experience() {
   const items = [
     {
@@ -166,14 +167,14 @@ function Experience() {
       <h2>İş Tecrübeleri</h2>
 
       <div className="timeline">
-        {items.map(it => (
+        {items.map((it) => (
           <article className="tl-item" key={it.company + it.period}>
             <div className="tl-dot" />
             <div className="tl-card">
               <h3 className="tl-title">{it.company}</h3>
               <p className="tl-sub">{it.period} · {it.role}</p>
               <ul>
-                {it.bullets.map(b => <li key={b}>{b}</li>)}
+                {it.bullets.map((b) => <li key={b}>{b}</li>)}
               </ul>
             </div>
           </article>
@@ -183,6 +184,33 @@ function Experience() {
   );
 }
 
+/** ----------------------- PORTFOLYO (Belge görseli) ----------------------- */
+function Portfolio() {
+  return (
+    <section id="portfolio" className="container section">
+      <Eyebrow>PORTFOLYO</Eyebrow>
+      <h2>Çalışma & Referans Belgeleri</h2>
+
+      <div className="portfolio-grid">
+        <figure className="portfolio-card">
+          <a href={PORTFOLIO_IMG} target="_blank" rel="noreferrer" title="Büyüt">
+            <img src={PORTFOLIO_IMG} alt="Görev ve Sorumluluk Beyanı" loading="lazy" />
+          </a>
+          <figcaption className="portfolio-meta">
+            <div className="title">Görev ve Sorumluluk Beyanı</div>
+            <div className="sub">Foça Bakım Onarım ve İstihkam Komutanlığı</div>
+            <div className="actions">
+              <a className="btn btn-outline" href={PORTFOLIO_IMG} target="_blank" rel="noreferrer">Büyüt</a>
+              <a className="btn btn-primary" href={PORTFOLIO_IMG} download>İndir (JPG)</a>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+/** ----------------------- EĞİTİM ----------------------- */
 function Education() {
   return (
     <section id="edu" className="container section">
@@ -196,6 +224,7 @@ function Education() {
   );
 }
 
+/** ----------------------- DİL & SERTİFİKALAR ----------------------- */
 function Certifications() {
   return (
     <section id="certs" className="container section">
@@ -209,12 +238,13 @@ function Certifications() {
 
       <div className="card">
         <h4>Sertifikalar</h4>
-        <p><span className="badge outline">Sertifika</span> Sıvı Yakıtlı Kalorifer Ateşçisi Belgesi</p>
+        <p><span className="badge outline">Sertifika</span> Sıvı Yakıtlı Kalorifer Ateşçisi Sertifikası</p>
       </div>
     </section>
   );
 }
 
+/** ----------------------- İLETİŞİM ----------------------- */
 function Contact() {
   return (
     <section id="contact" className="container section">
@@ -222,7 +252,13 @@ function Contact() {
       <h2>Bağlantı Kur</h2>
 
       <div className="grid-2">
-        <form className="card form" onSubmit={(e)=>{e.preventDefault(); alert("Bu sürüm mock'tur. Form verileri tarayıcıda tutulur.");}}>
+        <form
+          className="card form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            alert("Bu sürüm mock'tur. Form verileri tarayıcıda tutulur.");
+          }}
+        >
           <h4>Mesaj Gönder</h4>
           <label>Ad Soyad<input placeholder="Adınız" /></label>
           <label>E-posta<input placeholder="email@ornek.com" type="email" /></label>
@@ -242,6 +278,7 @@ function Contact() {
   );
 }
 
+/** ----------------------- FOOTER ----------------------- */
 function Footer() {
   return (
     <footer className="footer">
@@ -259,6 +296,7 @@ function Footer() {
   );
 }
 
+/** ----------------------- SAYFA ----------------------- */
 export default function App() {
   return (
     <>
@@ -266,6 +304,7 @@ export default function App() {
       <Hero />
       <About />
       <Experience />
+      <Portfolio />
       <Education />
       <Certifications />
       <Contact />
