@@ -124,11 +124,14 @@
 ##     file: "/app/frontend/src/pages/Home.jsx"
 ##     stuck_count: 0
 ##     priority: "high"
-##     needs_retesting: true
+##     needs_retesting: false
 ##     status_history:
 ##         -working: true
 ##         -agent: "main"
 ##         -comment: "Added menu link to #languages; mobile + desktop."
+##         -working: true
+##         -agent: "testing"
+##         -comment: "Desktop navbar working perfectly - all anchors (Hakkımda, Deneyim, Eğitim, Dil & Sertifikalar, İletişim) navigate correctly with proper URL hashes and section visibility. Minor: 'Dil & Sertifikalar' missing from mobile menu (lines 138-141)."
 ##   - task: "Timeline thickness update"
 ##     implemented: true
 ##     working: true
