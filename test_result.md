@@ -143,6 +143,9 @@
 ##         -working: true
 ##         -agent: "testing"
 ##         -comment: "Desktop+mobile navbar tested previously; works."
+##         -working: true
+##         -agent: "testing"
+##         -comment: "Navbar navigation re-tested successfully. 'Portfolyo' and 'Dil & Sertifikalar' anchor links navigate correctly to their respective sections (#portfolio and #languages). Both desktop navigation working properly."
 ##   - task: "Portfolio inline viewer (PDF or image fallback)"
 ##     implemented: true
 ##     working: true
