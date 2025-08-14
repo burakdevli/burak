@@ -64,7 +64,6 @@ export const EXPERIENCE = [
   },
 ];
 
-// Güncel Eğitim Bilgisi
 export const EDUCATION = [
   {
     school: "Trakya Üniversitesi",
@@ -75,4 +74,8 @@ export const EDUCATION = [
 
 export const CERTIFICATIONS = [
   { name: "Sıvı Yakıtlı Kalorifer Ateşçisi Belgesi" },
+];
+
+export const LANGUAGES = [
+  { name: "İngilizce", level: "B2" },
 ];

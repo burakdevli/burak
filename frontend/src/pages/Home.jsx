@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { PROFILE, SKILLS, EXPERIENCE, EDUCATION, CERTIFICATIONS } from "../mock/mock";
+import { PROFILE, SKILLS, EXPERIENCE, EDUCATION, CERTIFICATIONS, LANGUAGES } from "../mock/mock";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
@@ -211,20 +211,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Education & Certs */}
+      {/* Education Only */}
       <section id="education" className="max-w-6xl mx-auto px-4 py-6 md:py-10">
-        <SectionHeader label="Eğitim & Sertifikalar" title="Akademik Arka Plan" />
+        <SectionHeader label="Eğitim" title="Akademik Arka Plan" />
+        <Card className="rounded-none">
+          <CardHeader>
+            <CardTitle className="text-gray-900">Eğitim</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {EDUCATION.map((e, i) => (
+              <div key={i}>
+                <p className="font-medium text-gray-900">{e.school}</p>
+                <p className="text-sm text-gray-600">{e.degree}</p>
+                <p className="text-xs text-gray-500">{e.year}</p>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Languages & Certifications - Separate Section */}
+      <section id="languages" className="max-w-6xl mx-auto px-4 py-6 md:py-10">
+        <SectionHeader label="Dil & Sertifikalar" title="Yetkinlikler" />
         <div className="grid md:grid-cols-2 gap-6">
           <Card className="rounded-none">
             <CardHeader>
-              <CardTitle className="text-gray-900">Eğitim</CardTitle>
+              <CardTitle className="text-gray-900">Diller</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              {EDUCATION.map((e, i) => (
-                <div key={i}>
-                  <p className="font-medium text-gray-900">{e.school}</p>
-                  <p className="text-sm text-gray-600">{e.degree}</p>
-                  <p className="text-xs text-gray-500">{e.year}</p>
+              {LANGUAGES.map((l, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="text-gray-800">{l.name}</span>
+                  <Badge className="rounded-none bg-blue-50 text-[#1E3A8A] border border-blue-200">{l.level}</Badge>
                 </div>
               ))}
             </CardContent>
