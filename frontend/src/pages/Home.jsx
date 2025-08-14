@@ -67,14 +67,13 @@ export default function Home() {
     []
   );
 
-  const onSubmitContact = (e) => {
+  const onSubmitContact = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const payload = {
       name: form.get("name"),
       email: form.get("email"),
       message: form.get("message"),
-      ts: new Date().toISOString(),
     };
 
     if (!payload.name || !payload.email || !payload.message) {
@@ -86,16 +85,18 @@ export default function Home() {
     }
 
     try {
-      const existing = JSON.parse(localStorage.getItem("contact_submissions") || "[]");
-      existing.push(payload);
-      localStorage.setItem("contact_submissions", JSON.stringify(existing));
-      (e.target).reset();
-      toast({
-        title: "Mesaj gönderildi",
-        description: "Mock olarak tarayıcıya kaydedildi.",
+      const base = process.env.REACT_APP_BACKEND_URL || import.meta?.env?.REACT_APP_BACKEND_URL;
+      const res = await fetch(`${base}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
+      if (!res.ok) throw new Error("request_failed");
+      await res.json();
+      (e.target).reset();
+      toast({ title: "Mesaj gönderildi", description: "Talebiniz alındı." });
     } catch (err) {
-      toast({ title: "Hata", description: "Kaydetme sırasında bir sorun oluştu." });
+      toast({ title: "Hata", description: "Gönderim sırasında bir sorun oluştu." });
     }
   };
 
