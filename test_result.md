@@ -122,11 +122,14 @@
 ##     file: "/app/backend/server.py"
 ##     stuck_count: 0
 ##     priority: "high"
-##     needs_retesting: true
+##     needs_retesting: false
 ##     status_history:
 ##         -working: true
 ##         -agent: "main"
 ##         -comment: "POST/GET /api/contact implemented. EMAIL_ENABLED flag introduced; default false so only Mongo save."
+##         -working: true
+##         -agent: "testing"
+##         -comment: "Backend tests passed. POST /api/contact returns 201 with status='new'. EMAIL_ENABLED defaults to false correctly. All CRUD operations working."
 
 ## frontend:
 ##   - task: "Navbar navigation including Portfolyo and Dil & Sertifikalar"
