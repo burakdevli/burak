@@ -197,3 +197,5 @@
 ##     -message: "Run backend tests for /api/contact after EMAIL_ENABLED flag change; then run UI tests for contact submission and portfolio inline viewer."
 ##     -agent: "testing"
 ##     -message: "Backend testing completed successfully. POST /api/contact returns 201 with status='new' when EMAIL_ENABLED=false (default). All backend APIs working correctly. Ready for UI testing."
+##     -agent: "testing"
+##     -message: "Frontend UI testing completed successfully. All requested functionality working: 1) Contact form submits to backend with 201 response and shows success toast 'Mesaj gönderildi' 2) Portfolio inline viewer renders JPG image correctly with working 'Büyüt' modal 3) Navbar anchors for 'Portfolyo' and 'Dil & Sertifikalar' navigate correctly 4) CV link opens latest PDF in new tab. No localStorage writes detected as expected. PostHog console warnings ignored as instructed."
