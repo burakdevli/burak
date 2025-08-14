@@ -2,21 +2,21 @@
 import { useState } from "react";
 import "./App.css";
 
-/** Statik dosyalar (public klasörü) */
-const PHOTO = process.env.PUBLIC_URL + "/FGS_2955.jpg";
-const CV_URL = process.env.PUBLIC_URL + "/BURAK_DEVLI_CV.pdf";
+/** public/ klasöründeki statik dosyalar */
+const PHOTO         = process.env.PUBLIC_URL + "/FGS_2955.jpg";
+const CV_URL        = process.env.PUBLIC_URL + "/BURAK_DEVLI_CV.pdf";
 const PORTFOLIO_PDF = process.env.PUBLIC_URL + "/Portfolyo.pdf";
 
-/* --------------------------- Navbar --------------------------- */
+/* --------------------------- NAVBAR --------------------------- */
 function Navbar() {
   const [open, setOpen] = useState(false);
   const links = [
-    { href: "#about", label: "Hakkımda" },
-    { href: "#exp", label: "Deneyim" },
+    { href: "#about",     label: "Hakkımda" },
+    { href: "#exp",       label: "Deneyim" },
     { href: "#portfolio", label: "Portfolyo" },
-    { href: "#edu", label: "Eğitim" },
-    { href: "#certs", label: "Dil & Sertifikalar" },
-    { href: "#contact", label: "İletişim" },
+    { href: "#edu",       label: "Eğitim" },
+    { href: "#certs",     label: "Dil & Sertifikalar" },
+    { href: "#contact",   label: "İletişim" },
   ];
 
   return (
@@ -24,11 +24,9 @@ function Navbar() {
       <div className="container nav-inner">
         <a href="#top" className="brand">Burak Devli</a>
 
-        {/* Masaüstü bağlantılar */}
+        {/* Masaüstü menü */}
         <nav className="links">
-          {links.map((l) => (
-            <a key={l.href} href={l.href}>{l.label}</a>
-          ))}
+          {links.map(l => <a key={l.href} href={l.href}>{l.label}</a>)}
           <a className="btn btn-primary btn-small" href={CV_URL} download>
             CV’yi indir
           </a>
@@ -38,16 +36,16 @@ function Navbar() {
         <button
           className="hamburger"
           aria-label="Menü"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => setOpen(v => !v)}
         >
           <span /><span /><span />
         </button>
       </div>
 
-      {/* Mobil çekmece menü */}
+      {/* Mobil çekmece */}
       {open && (
         <div className="drawer">
-          {links.map((l) => (
+          {links.map(l => (
             <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
               {l.label}
             </a>
@@ -66,7 +64,7 @@ function Navbar() {
   );
 }
 
-/* ----------------------------- Hero ----------------------------- */
+/* ----------------------------- HERO ----------------------------- */
 function Hero() {
   return (
     <section id="top" className="hero container">
@@ -80,9 +78,10 @@ function Hero() {
           Makine Mühendisi | Bakım &amp; Onarım | Proje Yönetimi | Saha Mühendisliği
         </p>
         <p className="lead">
-          Mekanik sistemlerin sürekli ve güvenli çalışması için bakım planlama, arıza tespiti
-          ve hızlı çözüm üretme konusunda uzmanım. Önleyici bakım süreçlerinden kriz yönetimine
-          kadar geniş mühendislik becerilerimle, yüksek kalite standartlarında verimlilik artışı sağlarım.
+          Mekanik sistemlerin sürekli ve güvenli çalışması için bakım planlama, arıza
+          tespiti ve hızlı çözüm üretme konusunda uzmanım. Önleyici bakım süreçlerinden
+          kriz yönetimine kadar geniş mühendislik becerilerimle, yüksek kalite
+          standartlarında verimlilik artışı sağlarım.
         </p>
         <div className="cta">
           <a className="btn btn-primary" href={CV_URL} download>CV’yi İndir</a>
@@ -93,20 +92,20 @@ function Hero() {
   );
 }
 
-/* ---------------------- Ortak küçük başlık ---------------------- */
+/* ----------------------- Küçük başlık etiketi ----------------------- */
 const Eyebrow = ({ children }) => <div className="eyebrow">{children}</div>;
 
-/* ------------------------- Hakkımda + Skill ------------------------- */
+/* ------------------------- HAKKIMDA + SKILLS ------------------------- */
 function About() {
   const skills = [
     { icon: "calendar", label: "Proje Yönetimi" },
-    { icon: "wrench", label: "Bakım & Onarım" },
-    { icon: "map", label: "Saha Uygulamaları" },
+    { icon: "wrench",  label: "Bakım & Onarım" },
+    { icon: "map",     label: "Saha Uygulamaları" },
     { icon: "warning", label: "Kriz Yönetimi" },
-    { icon: "team", label: "Takım Liderliği" },
-    { icon: "doc", label: "Teknik Raporlama" },
-    { icon: "ruler", label: "AutoCAD" },
-    { icon: "ms", label: "MS Office" },
+    { icon: "team",    label: "Takım Liderliği" },
+    { icon: "doc",     label: "Teknik Raporlama" },
+    { icon: "ruler",   label: "AutoCAD" },
+    { icon: "ms",      label: "MS Office" },
   ];
 
   return (
@@ -116,14 +115,16 @@ function About() {
 
       <div className="card">
         <p>
-          Takım çalışmasına yatkın, analitik düşünebilen ve saha tecrübesi yüksek bir makine mühendisiyim.
-          Mühendis asteğmen olarak askerlik görevimi yoğun saha bakım ve onarım faaliyetleriyle tamamladım.
-          Amacım, üretim odaklı ve yüksek kalite standartlarına sahip firmalarda mühendislik yetkinliklerimle fark yaratmaktır.
+          Takım çalışmasına yatkın, analitik düşünebilen ve saha tecrübesi yüksek bir
+          makine mühendisiyim. Mühendis asteğmen olarak askerlik görevimi yoğun saha
+          bakım ve onarım faaliyetleriyle tamamladım. Amacım, üretim odaklı ve yüksek
+          kalite standartlarına sahip firmalarda mühendislik yetkinliklerimle fark
+          yaratmaktır.
         </p>
       </div>
 
       <div className="skills-grid">
-        {skills.map((s) => (
+        {skills.map(s => (
           <div className="skill" key={s.label}>
             <span className={`ico ${s.icon}`} aria-hidden />
             <span>{s.label}</span>
@@ -134,7 +135,7 @@ function About() {
   );
 }
 
-/* --------------------------- Deneyim --------------------------- */
+/* ----------------------------- DENEYİM ----------------------------- */
 function Experience() {
   const items = [
     {
@@ -179,15 +180,13 @@ function Experience() {
       <h2>İş Tecrübeleri</h2>
 
       <div className="timeline">
-        {items.map((it) => (
+        {items.map(it => (
           <article className="tl-item" key={it.company + it.period}>
             <div className="tl-dot" />
             <div className="tl-card">
               <h3 className="tl-title">{it.company}</h3>
               <p className="tl-sub">{it.period} · {it.role}</p>
-              <ul>
-                {it.bullets.map((b) => <li key={b}>{b}</li>)}
-              </ul>
+              <ul>{it.bullets.map(b => <li key={b}>{b}</li>)}</ul>
             </div>
           </article>
         ))}
@@ -196,8 +195,7 @@ function Experience() {
   );
 }
 
-/* --------------------------- Portfolyo --------------------------- */
-/* PDF gömülü kart + büyüt/indir aksiyonları */
+/* ----------------------------- PORTFOLYO ----------------------------- */
 function Portfolio() {
   return (
     <section id="portfolio" className="container section">
@@ -206,11 +204,8 @@ function Portfolio() {
 
       <div className="portfolio-grid">
         <figure className="portfolio-card">
-          <object
-            data={PORTFOLIO_PDF}
-            type="application/pdf"
-            className="portfolio-embed"
-          >
+          {/* PDF gömme + erişilebilir yedek metin */}
+          <object data={PORTFOLIO_PDF} type="application/pdf" className="portfolio-embed">
             <p style={{ padding: "12px" }}>
               Tarayıcınız PDF görüntüleyemiyor.{" "}
               <a href={PORTFOLIO_PDF} target="_blank" rel="noreferrer">PDF’i aç</a> veya{" "}
@@ -236,7 +231,7 @@ function Portfolio() {
   );
 }
 
-/* ---------------------------- Eğitim ---------------------------- */
+/* ------------------------------ EĞİTİM ------------------------------ */
 function Education() {
   return (
     <section id="edu" className="container section">
@@ -250,7 +245,7 @@ function Education() {
   );
 }
 
-/* --------------------- Dil & Sertifikalar --------------------- */
+/* ---------------------- DİL & SERTİFİKALAR ---------------------- */
 function Certifications() {
   return (
     <section id="certs" className="container section">
@@ -259,22 +254,21 @@ function Certifications() {
 
       <div className="card">
         <h4>Diller</h4>
-        <p>
-          İngilizce <span className="badge">B2</span>
-        </p>
+        <p>İngilizce <span className="badge">B2</span></p>
       </div>
 
       <div className="card">
-  <h4>Sertifikalar</h4>
-  <div className="cert-row">
-    <span className="badge outline">Sertifika</span>
-    <span>Sıvı Yakıtlı Kalorifer Ateşçisi Sertifikası</span>
-  </div>
-</div>
-
+        <h4>Sertifikalar</h4>
+        <div className="cert-row">
+          <span className="badge outline">Sertifika</span>
+          <span>Sıvı Yakıtlı Kalorifer Ateşçisi Belgesi</span>
+        </div>
+      </div>
+    </section>
+  );
 }
 
-/* ---------------------------- İletişim ---------------------------- */
+/* ------------------------------- İLETİŞİM ------------------------------- */
 function Contact() {
   return (
     <section id="contact" className="container section">
@@ -291,8 +285,8 @@ function Contact() {
         >
           <h4>Mesaj Gönder</h4>
           <label>Ad Soyad<input placeholder="Adınız" /></label>
-          <label>E-posta<input placeholder="email@ornek.com" type="email" /></label>
-          <label>Mesaj<textarea placeholder="Mesajınız" rows={6} /></label>
+          <label>E-posta<input type="email" placeholder="email@ornek.com" /></label>
+          <label>Mesaj<textarea rows={6} placeholder="Mesajınız" /></label>
           <button className="btn btn-primary" type="submit">Gönder</button>
           <p className="help">Bu sürüm mock'tur: Form verileri yalnızca tarayıcıda saklanır.</p>
         </form>
@@ -300,7 +294,7 @@ function Contact() {
         <div className="card contact-card">
           <h4>Doğrudan İletişim</h4>
           <p><span className="ico mail" /> <a href="mailto:burakdevli2@gmail.com">burakdevli2@gmail.com</a></p>
-          <p><span className="ico phone" /> 0533 136 00 59</p>
+          <p><span className="ico phone" /> <a href="tel:+905331360059">0533 136 00 59</a></p>
           <p><span className="ico in" /> <a href="https://www.linkedin.com/in/burak-devli" target="_blank" rel="noreferrer">LinkedIn Profilim</a></p>
         </div>
       </div>
@@ -308,7 +302,7 @@ function Contact() {
   );
 }
 
-/* ----------------------------- Footer ----------------------------- */
+/* -------------------------------- FOOTER -------------------------------- */
 function Footer() {
   return (
     <footer className="footer">
@@ -326,7 +320,7 @@ function Footer() {
   );
 }
 
-/* ------------------------------ Sayfa ------------------------------ */
+/* --------------------------------- APP --------------------------------- */
 export default function App() {
   return (
     <>
