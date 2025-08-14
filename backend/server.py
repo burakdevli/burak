@@ -36,6 +36,22 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Contact models
+class ContactCreate(BaseModel):
+    name: str = Field(..., min_length=1, max_length=200)
+    email: EmailStr
+    message: str = Field(..., min_length=1, max_length=5000)
+
+class ContactOut(BaseModel):
+    id: str
+    name: str
+    email: EmailStr
+    message: str
+    created_at: datetime
+    status: str
+    user_agent: Optional[str] = None
+    referer: Optional[str] = None
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
