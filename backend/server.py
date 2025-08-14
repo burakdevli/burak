@@ -69,6 +69,75 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
+# Email helper (SendGrid)
+async def send_email_via_sendgrid(subject: str, content: str) -> bool:
+    api_key = os.environ.get("SENDGRID_API_KEY")
+    sender = os.environ.get("EMAIL_FROM")
+    recipient = os.environ.get("EMAIL_TO")
+    if not api_key or not sender or not recipient:
+        logger.warning("Email not configured; skipping send.")
+        return False
+    try:
+        resp = requests.post(
+            "https://api.sendgrid.com/v3/mail/send",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "personalizations": [{"to": [{"email": recipient}]}],
+                "from": {"email": sender},
+                "subject": subject,
+                "content": [{"type": "text/plain", "value": content}],
+            },
+            timeout=10,
+        )
+        if resp.status_code in (200, 202):
+            return True
+        logger.error(f"SendGrid error {resp.status_code}: {resp.text}")
+        return False
+    except Exception as e:
+        logger.exception(f"Email send failed: {e}")
+        return False
+
+@api_router.post("/contact", response_model=ContactOut, status_code=201)
+async def create_contact(req: Request, body: ContactCreate):
+    doc = {
+        "id": str(uuid.uuid4()),
+        "name": body.name.strip(),
+        "email": str(body.email),
+        "message": body.message.strip(),
+        "created_at": datetime.utcnow(),
+        "status": "new",
+        "user_agent": req.headers.get("user-agent"),
+        "referer": req.headers.get("referer"),
+    }
+    await db.contacts.insert_one(doc)
+
+    # try email
+    subject = os.environ.get("EMAIL_SUBJECT", "Yeni portföy mesajı")
+    content = f"Ad: {doc['name']}\nEmail: {doc['email']}\nMesaj: {doc['message']}\nTarih: {doc['created_at'].isoformat()}"
+    sent = await app.state.loop.run_in_executor(None, lambda: send_email_via_sendgrid(subject, content))
+    # If using async->sync wrapper, handle bool or awaitable
+    if isinstance(sent, bool):
+        success = sent
+    else:
+        success = await sent
+
+    if success:
+        await db.contacts.update_one({"id": doc["id"]}, {"$set": {"status": "sent"}})
+        doc["status"] = "sent"
+    else:
+        await db.contacts.update_one({"id": doc["id"]}, {"$set": {"status": "error"}})
+        doc["status"] = "error"
+
+    return ContactOut(**doc)
+
+@api_router.get("/contact", response_model=List[ContactOut])
+async def list_contacts(limit: int = 50):
+    rows = await db.contacts.find().sort("created_at", -1).to_list(limit)
+    return [ContactOut(**{**r, "id": r.get("id", str(r.get("_id")))}) for r in rows]
+
 # Include the router in the main app
 app.include_router(api_router)
 
