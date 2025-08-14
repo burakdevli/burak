@@ -265,13 +265,13 @@ function Certifications() {
       </div>
 
       <div className="card">
-        <h4>Sertifikalar</h4>
-        <p>
-          <span className="badge outline">Sertifika</span> Sıvı Yakıtlı Kalorifer Ateşçisi Sertifikası
-        </p>
-      </div>
-    </section>
-  );
+  <h4>Sertifikalar</h4>
+  <div className="cert-row">
+    <span className="badge outline">Sertifika</span>
+    <span>Sıvı Yakıtlı Kalorifer Ateşçisi Sertifikası</span>
+  </div>
+</div>
+
 }
 
 /* ---------------------------- İletişim ---------------------------- */
