@@ -181,3 +181,5 @@
 ## agent_communication:
 ##     -agent: "main"
 ##     -message: "Please run UI tests for navbar anchors, CV download link, and contact form mock flow. Ignore PostHog/ws console errors (dev env)."
+##     -agent: "testing"
+##     -message: "Completed comprehensive UI testing. All major functionality working correctly. Found one minor issue: 'Dil & Sertifikalar' missing from mobile navigation menu (lines 135-147 in Home.jsx). All other tests passed including navbar anchors, CV download buttons, contact form with toast and localStorage, and timeline thickness."
