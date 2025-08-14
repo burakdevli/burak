@@ -73,7 +73,7 @@ export const EDUCATION = [
 ];
 
 export const CERTIFICATIONS = [
-  { name: "Sıvı Yakıtlı Kalorifer Ateşçisi Belgesi" },
+  { name: "Sıvı Yakıtlı Kalorifer Ateşçisi Sertifikası" },
 ];
 
 export const LANGUAGES = [
@@ -86,5 +86,6 @@ export const PORTFOLIO = [
     description: "Foça Bakım Onarım ve İstihkam Komutanlığı – Proje ve saha sorumluluklarının özetlendiği resmi yazı.",
     imageUrl:
       "https://customer-assets.emergentagent.com/job_engineer-portfolio-2/artifacts/huqa597e_Portfolyo.jpg",
+    pdfUrl: "", // PDF linki verilirse inline PDF görüntüleyici otomatik kullanılacak
   },
 ];

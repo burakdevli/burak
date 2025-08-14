@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-## user_problem_statement: "Portfolio sitesi: Kurumsal mavi-gri tema, deneyim timeline, eğitim, iletişim formu (mock), Dil & Sertifikalar menüde."
+## user_problem_statement: "Portfolio sitesi: Kurumsal mavi-gri tema, deneyim timeline, eğitim, iletişim formu (MongoDB), Portfolyo inline görüntüleme, Dil & Sertifikalar menüde."
 
 ## backend:
 ##   - task: "Status API (template)"
@@ -116,23 +116,20 @@
 ##         -working: true
 ##         -agent: "main"
 ##         -comment: "Template backend up; not used by frontend yet."
-##   - task: "Create contact + email via SendGrid"
+##   - task: "Create contact (Mongo only)"
 ##     implemented: true
 ##     working: true
 ##     file: "/app/backend/server.py"
 ##     stuck_count: 0
 ##     priority: "high"
-##     needs_retesting: false
+##     needs_retesting: true
 ##     status_history:
 ##         -working: true
 ##         -agent: "main"
-##         -comment: "Implemented POST/GET /api/contact, Mongo save and optional SendGrid email (env-based)."
-##         -working: true
-##         -agent: "testing"
-##         -comment: "Backend API testing completed successfully. Fixed asyncio loop issue in email sending. All endpoints working: GET /api/ returns Hello World (200), POST /api/contact creates contacts with proper validation (201), GET /api/contact lists contacts sorted by latest first (200). Email status shows 'error' as expected since SendGrid credentials not configured. All core functionality working correctly."
+##         -comment: "POST/GET /api/contact implemented. EMAIL_ENABLED flag introduced; default false so only Mongo save."
 
 ## frontend:
-##   - task: "Navbar navigation including Dil & Sertifikalar"
+##   - task: "Navbar navigation including Portfolyo and Dil & Sertifikalar"
 ##     implemented: true
 ##     working: true
 ##     file: "/app/frontend/src/pages/Home.jsx"
@@ -141,78 +138,57 @@
 ##     needs_retesting: false
 ##     status_history:
 ##         -working: true
+##         -agent: "testing"
+##         -comment: "Desktop+mobile navbar tested previously; works."
+##   - task: "Portfolio inline viewer (PDF or image fallback)"
+##     implemented: true
+##     working: true
+##     file: "/app/frontend/src/components/PortfolioCard.jsx"
+##     stuck_count: 0
+##     priority: "medium"
+##     needs_retesting: true
+##     status_history:
+##         -working: true
 ##         -agent: "main"
-##         -comment: "Added menu link to #languages; mobile + desktop."
-##         -working: true
-##         -agent: "testing"
-##         -comment: "Desktop navbar working perfectly - all anchors (Hakkımda, Deneyim, Eğitim, Dil & Sertifikalar, İletişim) navigate correctly with proper URL hashes and section visibility. Minor: 'Dil & Sertifikalar' missing from mobile menu (lines 138-141)."
-##         -working: true
-##         -agent: "testing"
-##         -comment: "RETESTED: Mobile menu now working perfectly! All required items present (Hakkımda, Deneyim, Eğitim, Dil & Sertifikalar, İletişim). 'Dil & Sertifikalar' navigation works correctly - URL hash updates to #languages and section with 'Yetkinlikler' heading is visible. Mobile viewport 390x780 tested successfully."
-##   - task: "Timeline thickness update"
+##         -comment: "Inline viewer uses <object> for PDFs, falls back to image for JPG."
+##   - task: "Contact form uses backend (POST /api/contact)"
 ##     implemented: true
 ##     working: true
 ##     file: "/app/frontend/src/pages/Home.jsx"
 ##     stuck_count: 0
-##     priority: "medium"
-##     needs_retesting: false
+##     priority: "high"
+##     needs_retesting: true
 ##     status_history:
 ##         -working: true
 ##         -agent: "main"
-##         -comment: "Made vertical line w-1 and slightly darker."
-##         -working: true
-##         -agent: "testing"
-##         -comment: "Timeline vertical line confirmed to have w-1 class (4px width) and is visible in #experience section."
-##   - task: "CV download button opens latest PDF"
+##         -comment: "Replaced mock localStorage with fetch to backend; shows toast on success/failure."
+##   - task: "Certification text updated"
 ##     implemented: true
 ##     working: true
 ##     file: "/app/frontend/src/mock/mock.js"
 ##     stuck_count: 0
-##     priority: "high"
+##     priority: "low"
 ##     needs_retesting: false
 ##     status_history:
 ##         -working: true
 ##         -agent: "main"
-##         -comment: "Updated cvUrl to new artifact URL."
-##         -working: true
-##         -agent: "testing"
-##         -comment: "Both header and hero CV download buttons working correctly. Both open https://customer-assets.emergentagent.com/job_engineer-portfolio-2/artifacts/x0jqc52h_BURAK%20DEVL%C4%B0__CV.pdf in new tab (_blank target)."
-##   - task: "Contact form mock localStorage + toast"
-##     implemented: true
-##     working: true
-##     file: "/app/frontend/src/pages/Home.jsx"
-##     stuck_count: 0
-##     priority: "high"
-##     needs_retesting: false
-##     status_history:
-##         -working: true
-##         -agent: "main"
-##         -comment: "Form saves to localStorage; shows toast via shadcn hook."
-##         -working: true
-##         -agent: "testing"
-##         -comment: "Contact form working perfectly. Form submission saves data to localStorage 'contact_submissions' key with correct payload structure. Success toast appears with 'Mesaj gönderildi' message. Form fields clear after successful submission."
+##         -comment: "Changed certificate label to 'Sıvı Yakıtlı Kalorifer Ateşçisi Sertifikası'."
 
 ## metadata:
 ##   created_by: "main_agent"
 ##   version: "1.0"
-##   test_sequence: 3
+##   test_sequence: 4
 ##   run_ui: true
 
 ## test_plan:
 ##   current_focus:
-##     - "Navbar navigation including Dil & Sertifikalar"
-##     - "CV download works (opens correct URL in new tab)"
-##     - "Contact form mock: save, reset, toast visible"
+##     - "Backend: POST /api/contact saves to Mongo without email (status=new)"
+##     - "Frontend: Contact form sends request and shows success toast"
+##     - "Frontend: Portfolio section renders inline viewer (fallback to image since current asset is JPG)"
 ##   stuck_tasks: []
 ##   test_all: false
 ##   test_priority: "high_first"
 
 ## agent_communication:
 ##     -agent: "main"
-##     -message: "Please run UI tests for navbar anchors, CV download link, and contact form mock flow. Ignore PostHog/ws console errors (dev env)."
-##     -agent: "testing"
-##     -message: "Completed comprehensive UI testing. All major functionality working correctly. Found one minor issue: 'Dil & Sertifikalar' missing from mobile navigation menu (lines 135-147 in Home.jsx). All other tests passed including navbar anchors, CV download buttons, contact form with toast and localStorage, and timeline thickness."
-##     -agent: "testing"
-##     -message: "RETESTED: Mobile menu fix confirmed working! Targeted UI test completed successfully on mobile viewport (390x780). Mobile hamburger menu now contains all required items including 'Dil & Sertifikalar'. Navigation to #languages section works perfectly with correct URL hash and visible 'Yetkinlikler' heading. Previous mobile menu issue has been resolved."
-##     -agent: "testing"
-##     -message: "Backend API testing completed successfully. All FastAPI endpoints working correctly: GET /api/ returns Hello World, POST /api/contact creates contacts with proper validation and MongoDB persistence, GET /api/contact lists contacts sorted by latest first. Fixed minor asyncio loop issue in email sending. Email status shows 'error' as expected since SendGrid credentials not configured - this is working as designed. All core backend functionality verified and working."
+##     -message: "Run backend tests for /api/contact after EMAIL_ENABLED flag change; then run UI tests for contact submission and portfolio inline viewer."

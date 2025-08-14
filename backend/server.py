@@ -52,7 +52,6 @@ class ContactOut(BaseModel):
     user_agent: Optional[str] = None
     referer: Optional[str] = None
 
-# Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -75,7 +74,7 @@ def send_email_via_sendgrid(subject: str, content: str) -> bool:
     sender = os.environ.get("EMAIL_FROM")
     recipient = os.environ.get("EMAIL_TO")
     if not api_key or not sender or not recipient:
-        logger.warning("Email not configured; skipping send.")
+        logging.getLogger(__name__).warning("Email not configured; skipping send.")
         return False
     try:
         resp = requests.post(
@@ -94,10 +93,10 @@ def send_email_via_sendgrid(subject: str, content: str) -> bool:
         )
         if resp.status_code in (200, 202):
             return True
-        logger.error(f"SendGrid error {resp.status_code}: {resp.text}")
+        logging.getLogger(__name__).error(f"SendGrid error {resp.status_code}: {resp.text}")
         return False
     except Exception as e:
-        logger.exception(f"Email send failed: {e}")
+        logging.getLogger(__name__).exception(f"Email send failed: {e}")
         return False
 
 @api_router.post("/contact", response_model=ContactOut, status_code=201)
@@ -114,19 +113,20 @@ async def create_contact(req: Request, body: ContactCreate):
     }
     await db.contacts.insert_one(doc)
 
-    # try email
-    subject = os.environ.get("EMAIL_SUBJECT", "Yeni portföy mesajı")
-    content = f"Ad: {doc['name']}\nEmail: {doc['email']}\nMesaj: {doc['message']}\nTarih: {doc['created_at'].isoformat()}"
-    import asyncio
-    loop = asyncio.get_event_loop()
-    success = await loop.run_in_executor(None, lambda: send_email_via_sendgrid(subject, content))
-
-    if success:
-        await db.contacts.update_one({"id": doc["id"]}, {"$set": {"status": "sent"}})
-        doc["status"] = "sent"
-    else:
-        await db.contacts.update_one({"id": doc["id"]}, {"$set": {"status": "error"}})
-        doc["status"] = "error"
+    # Only send email if explicitly enabled
+    EMAIL_ENABLED = os.environ.get("EMAIL_ENABLED", "false").lower() == "true"
+    if EMAIL_ENABLED:
+        import asyncio
+        loop = asyncio.get_event_loop()
+        subject = os.environ.get("EMAIL_SUBJECT", "Yeni portföy mesajı")
+        content = f"Ad: {doc['name']}\nEmail: {doc['email']}\nMesaj: {doc['message']}\nTarih: {doc['created_at'].isoformat()}"
+        success = await loop.run_in_executor(None, lambda: send_email_via_sendgrid(subject, content))
+        if success:
+            await db.contacts.update_one({"id": doc["id"]}, {"$set": {"status": "sent"}})
+            doc["status"] = "sent"
+        else:
+            await db.contacts.update_one({"id": doc["id"]}, {"$set": {"status": "error"}})
+            doc["status"] = "error"
 
     return ContactOut(**doc)
 
@@ -141,7 +141,7 @@ app.include_router(api_router)
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
