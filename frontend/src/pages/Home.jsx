@@ -120,6 +120,7 @@ export default function Home() {
             <a className="text-xs text-gray-700 hover:text-[#1E3A8A]" href="#about">Hakkımda</a>
             <a className="text-xs text-gray-700 hover:text-[#1E3A8A]" href="#experience">Deneyim</a>
             <a className="text-xs text-gray-700 hover:text-[#1E3A8A]" href="#education">Eğitim</a>
+            <a className="text-xs text-gray-700 hover:text-[#1E3A8A]" href="#languages">Dil & Sertifikalar</a>
             <a className="text-xs text-gray-700 hover:text-[#1E3A8A]" href="#contact">İletişim</a>
             <a href={PROFILE.cvUrl} target="_blank" rel="noopener" className="inline-flex">
               <Button className="rounded-none bg-[#1E3A8A] text-white hover:bg-[#1b3579] h-9">
