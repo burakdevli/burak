@@ -122,11 +122,14 @@
 ##     file: "/app/backend/server.py"
 ##     stuck_count: 0
 ##     priority: "high"
-##     needs_retesting: true
+##     needs_retesting: false
 ##     status_history:
 ##         -working: true
 ##         -agent: "main"
 ##         -comment: "Implemented POST/GET /api/contact, Mongo save and optional SendGrid email (env-based)."
+##         -working: true
+##         -agent: "testing"
+##         -comment: "Backend API testing completed successfully. Fixed asyncio loop issue in email sending. All endpoints working: GET /api/ returns Hello World (200), POST /api/contact creates contacts with proper validation (201), GET /api/contact lists contacts sorted by latest first (200). Email status shows 'error' as expected since SendGrid credentials not configured. All core functionality working correctly."
 
 ## frontend:
 ##   - task: "Navbar navigation including Dil & Sertifikalar"
