@@ -70,7 +70,7 @@ async def get_status_checks():
     return [StatusCheck(**status_check) for status_check in status_checks]
 
 # Email helper (SendGrid)
-async def send_email_via_sendgrid(subject: str, content: str) -> bool:
+def send_email_via_sendgrid(subject: str, content: str) -> bool:
     api_key = os.environ.get("SENDGRID_API_KEY")
     sender = os.environ.get("EMAIL_FROM")
     recipient = os.environ.get("EMAIL_TO")
