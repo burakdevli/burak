@@ -117,12 +117,9 @@ async def create_contact(req: Request, body: ContactCreate):
     # try email
     subject = os.environ.get("EMAIL_SUBJECT", "Yeni portföy mesajı")
     content = f"Ad: {doc['name']}\nEmail: {doc['email']}\nMesaj: {doc['message']}\nTarih: {doc['created_at'].isoformat()}"
-    sent = await app.state.loop.run_in_executor(None, lambda: send_email_via_sendgrid(subject, content))
-    # If using async->sync wrapper, handle bool or awaitable
-    if isinstance(sent, bool):
-        success = sent
-    else:
-        success = await sent
+    import asyncio
+    loop = asyncio.get_event_loop()
+    success = await loop.run_in_executor(None, lambda: send_email_via_sendgrid(subject, content))
 
     if success:
         await db.contacts.update_one({"id": doc["id"]}, {"$set": {"status": "sent"}})
