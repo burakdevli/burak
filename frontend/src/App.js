@@ -2,12 +2,12 @@
 import { useState } from "react";
 import "./App.css";
 
-/** Statik varlık yolları (GitHub Pages alt dizini için güvenli) */
+/** Statik dosyalar (public klasörü) */
 const PHOTO = process.env.PUBLIC_URL + "/FGS_2955.jpg";
 const CV_URL = process.env.PUBLIC_URL + "/BURAK_DEVLI_CV.pdf";
 const PORTFOLIO_PDF = process.env.PUBLIC_URL + "/Portfolyo.pdf";
 
-/** ----------------------- NAVBAR ----------------------- */
+/* --------------------------- Navbar --------------------------- */
 function Navbar() {
   const [open, setOpen] = useState(false);
   const links = [
@@ -19,42 +19,54 @@ function Navbar() {
     { href: "#contact", label: "İletişim" },
   ];
 
-  function Portfolio() {
   return (
-    <section id="portfolio" className="container section">
-      <div className="eyebrow">PORTFOLYO</div>
-      <h2>Çalışma & Referans Belgeleri</h2>
+    <header className="nav">
+      <div className="container nav-inner">
+        <a href="#top" className="brand">Burak Devli</a>
 
-      <div className="portfolio-grid">
-        <figure className="portfolio-card">
-          {/* PDF gömme */}
-          <object
-            data={PORTFOLIO_PDF}
-            type="application/pdf"
-            className="portfolio-embed"
-          >
-            <p style={{padding:"12px"}}>
-              Tarayıcınız PDF görüntüleyemiyor.{" "}
-              <a href={PORTFOLIO_PDF} target="_blank" rel="noreferrer">PDF’i aç</a> veya{" "}
-              <a href={PORTFOLIO_PDF} download>indir</a>.
-            </p>
-          </object>
+        {/* Masaüstü bağlantılar */}
+        <nav className="links">
+          {links.map((l) => (
+            <a key={l.href} href={l.href}>{l.label}</a>
+          ))}
+          <a className="btn btn-primary btn-small" href={CV_URL} download>
+            CV’yi indir
+          </a>
+        </nav>
 
-          <figcaption className="portfolio-meta">
-            <div className="title">Görev ve Sorumluluk Beyanı</div>
-            <div className="sub">Foça Bakım Onarım ve İstihkam Komutanlığı</div>
-            <div className="actions">
-              <a className="btn btn-outline" href={PORTFOLIO_PDF} target="_blank" rel="noreferrer">Büyüt</a>
-              <a className="btn btn-primary" href={PORTFOLIO_PDF} download>İndir (PDF)</a>
-            </div>
-          </figcaption>
-        </figure>
+        {/* Mobil hamburger */}
+        <button
+          className="hamburger"
+          aria-label="Menü"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span /><span /><span />
+        </button>
       </div>
-    </section>
+
+      {/* Mobil çekmece menü */}
+      {open && (
+        <div className="drawer">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+              {l.label}
+            </a>
+          ))}
+          <a
+            className="btn btn-primary drawer-btn"
+            href={CV_URL}
+            download
+            onClick={() => setOpen(false)}
+          >
+            CV’yi indir
+          </a>
+        </div>
+      )}
+    </header>
   );
 }
 
-/** ----------------------- HERO ----------------------- */
+/* ----------------------------- Hero ----------------------------- */
 function Hero() {
   return (
     <section id="top" className="hero container">
@@ -81,9 +93,10 @@ function Hero() {
   );
 }
 
+/* ---------------------- Ortak küçük başlık ---------------------- */
 const Eyebrow = ({ children }) => <div className="eyebrow">{children}</div>;
 
-/** ----------------------- HAKKIMDA + YETENEKLER ----------------------- */
+/* ------------------------- Hakkımda + Skill ------------------------- */
 function About() {
   const skills = [
     { icon: "calendar", label: "Proje Yönetimi" },
@@ -121,7 +134,7 @@ function About() {
   );
 }
 
-/** ----------------------- DENEYİM (Zaman Çizelgesi) ----------------------- */
+/* --------------------------- Deneyim --------------------------- */
 function Experience() {
   const items = [
     {
@@ -183,7 +196,8 @@ function Experience() {
   );
 }
 
-/** ----------------------- PORTFOLYO (Belge görseli) ----------------------- */
+/* --------------------------- Portfolyo --------------------------- */
+/* PDF gömülü kart + büyüt/indir aksiyonları */
 function Portfolio() {
   return (
     <section id="portfolio" className="container section">
@@ -192,15 +206,28 @@ function Portfolio() {
 
       <div className="portfolio-grid">
         <figure className="portfolio-card">
-          <a href={PORTFOLIO_IMG} target="_blank" rel="noreferrer" title="Büyüt">
-            <img src={PORTFOLIO_IMG} alt="Görev ve Sorumluluk Beyanı" loading="lazy" />
-          </a>
+          <object
+            data={PORTFOLIO_PDF}
+            type="application/pdf"
+            className="portfolio-embed"
+          >
+            <p style={{ padding: "12px" }}>
+              Tarayıcınız PDF görüntüleyemiyor.{" "}
+              <a href={PORTFOLIO_PDF} target="_blank" rel="noreferrer">PDF’i aç</a> veya{" "}
+              <a href={PORTFOLIO_PDF} download>indir</a>.
+            </p>
+          </object>
+
           <figcaption className="portfolio-meta">
             <div className="title">Görev ve Sorumluluk Beyanı</div>
             <div className="sub">Foça Bakım Onarım ve İstihkam Komutanlığı</div>
             <div className="actions">
-              <a className="btn btn-outline" href={PORTFOLIO_IMG} target="_blank" rel="noreferrer">Büyüt</a>
-              <a className="btn btn-primary" href={PORTFOLIO_IMG} download>İndir (JPG)</a>
+              <a className="btn btn-outline" href={PORTFOLIO_PDF} target="_blank" rel="noreferrer">
+                Büyüt
+              </a>
+              <a className="btn btn-primary" href={PORTFOLIO_PDF} download>
+                İndir (PDF)
+              </a>
             </div>
           </figcaption>
         </figure>
@@ -209,7 +236,7 @@ function Portfolio() {
   );
 }
 
-/** ----------------------- EĞİTİM ----------------------- */
+/* ---------------------------- Eğitim ---------------------------- */
 function Education() {
   return (
     <section id="edu" className="container section">
@@ -223,7 +250,7 @@ function Education() {
   );
 }
 
-/** ----------------------- DİL & SERTİFİKALAR ----------------------- */
+/* --------------------- Dil & Sertifikalar --------------------- */
 function Certifications() {
   return (
     <section id="certs" className="container section">
@@ -232,18 +259,22 @@ function Certifications() {
 
       <div className="card">
         <h4>Diller</h4>
-        <p>İngilizce <span className="badge">B2</span></p>
+        <p>
+          İngilizce <span className="badge">B2</span>
+        </p>
       </div>
 
       <div className="card">
         <h4>Sertifikalar</h4>
-        <p><span className="badge outline">Sertifika</span> Sıvı Yakıtlı Kalorifer Ateşçisi Sertifikası</p>
+        <p>
+          <span className="badge outline">Sertifika</span> Sıvı Yakıtlı Kalorifer Ateşçisi Sertifikası
+        </p>
       </div>
     </section>
   );
 }
 
-/** ----------------------- İLETİŞİM ----------------------- */
+/* ---------------------------- İletişim ---------------------------- */
 function Contact() {
   return (
     <section id="contact" className="container section">
@@ -277,7 +308,7 @@ function Contact() {
   );
 }
 
-/** ----------------------- FOOTER ----------------------- */
+/* ----------------------------- Footer ----------------------------- */
 function Footer() {
   return (
     <footer className="footer">
@@ -295,7 +326,7 @@ function Footer() {
   );
 }
 
-/** ----------------------- SAYFA ----------------------- */
+/* ------------------------------ Sayfa ------------------------------ */
 export default function App() {
   return (
     <>
