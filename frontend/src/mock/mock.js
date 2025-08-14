@@ -59,7 +59,7 @@ export const EXPERIENCE = [
   {
     company: "Sistem Alüminyum San. ve Tic. A.Ş.",
     dates: "Mar 2020 – Ağu 2020",
-    role: "CNC Torna Elemanı",
+    role: "CNC Torna Tezgah Kullanımı",
     bullets: ["Mekanik işlem bölümü"],
   },
 ];
