@@ -1,22 +1,57 @@
 // frontend/src/App.js
+import { useState } from "react";
 import "./App.css";
 
 const PHOTO = process.env.PUBLIC_URL + "/FGS_2955.jpg";
 const CV_URL = process.env.PUBLIC_URL + "/BURAK_DEVLI_CV.pdf";
 
 function Navbar() {
+  const [open, setOpen] = useState(false);
+  const links = [
+    { href: "#about", label: "Hakkımda" },
+    { href: "#exp", label: "Deneyim" },
+    { href: "#portfolio", label: "Portfolyo" },
+    { href: "#edu", label: "Eğitim" },
+    { href: "#certs", label: "Dil & Sertifikalar" },
+    { href: "#contact", label: "İletişim" },
+  ];
+
   return (
     <header className="nav">
       <div className="container nav-inner">
         <a href="#top" className="brand">Burak Devli</a>
+
+        {/* Desktop links */}
         <nav className="links">
-          <a href="#about">Hakkımda</a>
-          <a href="#skills">Yetenekler</a>
-          <a href="#exp">Deneyim</a>
-          <a href="#edu">Eğitim</a>
-          <a href="#contact">İletişim</a>
+          {links.map(l => (
+            <a key={l.href} href={l.href}>{l.label}</a>
+          ))}
+          <a className="btn btn-primary btn-small" href={CV_URL} download>
+            CV’yi indir
+          </a>
         </nav>
+
+        {/* Mobile hamburger */}
+        <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Menu">
+          <span />
+          <span />
+          <span />
+        </button>
       </div>
+
+      {/* Mobile drawer */}
+      {open && (
+        <div className="drawer">
+          {links.map(l => (
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+              {l.label}
+            </a>
+          ))}
+          <a className="btn btn-primary drawer-btn" href={CV_URL} download onClick={() => setOpen(false)}>
+            CV’yi indir
+          </a>
+        </div>
+      )}
     </header>
   );
 }
@@ -24,64 +59,65 @@ function Navbar() {
 function Hero() {
   return (
     <section id="top" className="hero container">
-      <img className="avatar" src={PHOTO} alt="Burak Devli" />
+      <div className="photo-card">
+        <img className="avatar" src={PHOTO} alt="Burak Devli" />
+      </div>
+
       <div className="hero-text">
         <h1>Burak Devli</h1>
         <p className="subtitle">
-          Makine Mühendisi • Bakım & Onarım • Proje Yönetimi • Saha Mühendisliği
+          Makine Mühendisi | Bakım &amp; Onarım | Proje Yönetimi | Saha Mühendisliği
+        </p>
+        <p className="lead">
+          Mekanik sistemlerin sürekli ve güvenli çalışması için bakım planlama, arıza tespiti
+          ve hızlı çözüm üretme konusunda uzmanım. Önleyici bakım süreçlerinden kriz yönetimine
+          kadar geniş mühendislik becerilerimle, yüksek kalite standartlarında verimlilik artışı sağlarım.
         </p>
         <div className="cta">
-          <a className="btn btn-primary" href={CV_URL} download>
-            CV’yi indir
-          </a>
-          <a
-            className="btn btn-outline"
-            href="https://www.linkedin.com/in/burak-devli"
-            target="_blank"
-            rel="noreferrer"
-          >
-            LinkedIn
-          </a>
+          <a className="btn btn-primary" href={CV_URL} download>CV’yi İndir</a>
+          <a className="btn btn-outline" href="#contact">İletişime Geç</a>
         </div>
       </div>
     </section>
   );
 }
 
-function About() {
-  return (
-    <section id="about" className="container section">
-      <h2>Hakkımda</h2>
-      <p>
-        Mekanik sistemlerin sürekli ve güvenli çalışması için bakım planlama, arıza tespiti
-        ve hızlı çözüm üretme konusunda uzmanım. Önleyici/periyodik bakım, saha uygulamaları
-        ve teknik raporlama konularında güçlü pratiğim var. Mühendis asteğmen olarak
-        yoğun saha bakım ve onarım faaliyetleri yürüttüm; kriz anlarında ekip yönetimi ve
-        hızlı karar alma ile verimlilik artışı sağladım.
-      </p>
-    </section>
-  );
+function Eyebrow({ children }) {
+  return <div className="eyebrow">{children}</div>;
 }
 
-function Skills() {
+function About() {
   const skills = [
-    "Proje Yönetimi",
-    "Bakım & Onarım",
-    "Saha Uygulamaları",
-    "Kriz Yönetimi",
-    "Takım Liderliği",
-    "Teknik Raporlama",
-    "AutoCAD",
-    "MS Office",
+    { icon: "calendar", label: "Proje Yönetimi" },
+    { icon: "wrench", label: "Bakım & Onarım" },
+    { icon: "map", label: "Saha Uygulamaları" },
+    { icon: "warning", label: "Kriz Yönetimi" },
+    { icon: "team", label: "Takım Liderliği" },
+    { icon: "doc", label: "Teknik Raporlama" },
+    { icon: "ruler", label: "AutoCAD" },
+    { icon: "ms", label: "MS Office" },
   ];
+
   return (
-    <section id="skills" className="container section">
-      <h2>Yetenekler</h2>
-      <ul className="skills">
-        {skills.map((s) => (
-          <li key={s}>{s}</li>
+    <section id="about" className="container section">
+      <Eyebrow>HAKKIMDA</Eyebrow>
+      <h2>Profesyonel Özet</h2>
+      <div className="card">
+        <p>
+          Takım çalışmasına yatkın, analitik düşünebilen ve saha tecrübesi yüksek bir makine mühendisiyim.
+          Mühendis asteğmen olarak askerlik görevimi yoğun saha bakım ve onarım faaliyetleriyle tamamladım.
+          Amacım, üretim odaklı ve yüksek kalite standartlarına sahip firmalarda mühendislik yetkinliklerimle fark yaratmaktır.
+        </p>
+      </div>
+
+      <div className="skills-grid">
+        {skills.map(s => (
+          <div className="skill" key={s.label}>
+            <span className={`ico ${s.icon}`} aria-hidden />
+            <span>{s.label}</span>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }
@@ -118,28 +154,29 @@ function Experience() {
     },
     {
       company: "Sistem Alüminyum San. ve Tic. A.Ş.",
-      role: "CNC Torna Elemanı",
+      role: "CNC Torna Tezgah Kullanımı",
       period: "Mar 2020 – Ağu 2020",
       bullets: ["Mekanik işlem bölümü"],
     },
   ];
+
   return (
     <section id="exp" className="container section">
-      <h2>Deneyim</h2>
+      <Eyebrow>DENEYİM</Eyebrow>
+      <h2>İş Tecrübeleri</h2>
+
       <div className="timeline">
-        {items.map((it) => (
-          <div key={it.company + it.period} className="timeline-item">
-            <div className="when">{it.period}</div>
-            <div className="what">
-              <h3>{it.company}</h3>
-              <p className="role">{it.role}</p>
+        {items.map(it => (
+          <article className="tl-item" key={it.company + it.period}>
+            <div className="tl-dot" />
+            <div className="tl-card">
+              <h3 className="tl-title">{it.company}</h3>
+              <p className="tl-sub">{it.period} · {it.role}</p>
               <ul>
-                {it.bullets.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
+                {it.bullets.map(b => <li key={b}>{b}</li>)}
               </ul>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </section>
@@ -149,16 +186,30 @@ function Experience() {
 function Education() {
   return (
     <section id="edu" className="container section">
-      <h2>Eğitim & Sertifikalar</h2>
+      <Eyebrow>EĞİTİM</Eyebrow>
+      <h2>Akademik Arka Plan</h2>
       <div className="card">
-        <p>
-          <strong>Trakya Üniversitesi – Makine Mühendisliği (Lisans)</strong>
-          <br />
-          2018 – 2024
-        </p>
-        <p>
-          <strong>Sertifika:</strong> Sıvı Yakıtlı Kalorifer Ateşçisi Belgesi (MEB)
-        </p>
+        <p className="edu-title">Trakya Üniversitesi<br />Makine Mühendisliği</p>
+        <p className="muted">2024</p>
+      </div>
+    </section>
+  );
+}
+
+function Certifications() {
+  return (
+    <section id="certs" className="container section">
+      <Eyebrow>DİL &amp; SERTİFİKALAR</Eyebrow>
+      <h2>Yetkinlikler</h2>
+
+      <div className="card">
+        <h4>Diller</h4>
+        <p>İngilizce <span className="badge">B2</span></p>
+      </div>
+
+      <div className="card">
+        <h4>Sertifikalar</h4>
+        <p><span className="badge outline">Sertifika</span> Sıvı Yakıtlı Kalorifer Ateşçisi Belgesi</p>
       </div>
     </section>
   );
@@ -167,25 +218,25 @@ function Education() {
 function Contact() {
   return (
     <section id="contact" className="container section">
-      <h2>İletişim</h2>
-      <div className="card">
-        <p>
-          <strong>E-posta:</strong>{" "}
-          <a href="mailto:burakdevli2@gmail.com">burakdevli2@gmail.com</a>
-        </p>
-        <p>
-          <strong>Telefon:</strong> 0533 136 00 59
-        </p>
-        <p>
-          <strong>LinkedIn:</strong>{" "}
-          <a
-            href="https://www.linkedin.com/in/burak-devli"
-            target="_blank"
-            rel="noreferrer"
-          >
-            linkedin.com/in/burak-devli
-          </a>
-        </p>
+      <Eyebrow>İLETİŞİM</Eyebrow>
+      <h2>Bağlantı Kur</h2>
+
+      <div className="grid-2">
+        <form className="card form" onSubmit={(e)=>{e.preventDefault(); alert("Bu sürüm mock'tur. Form verileri tarayıcıda tutulur.");}}>
+          <h4>Mesaj Gönder</h4>
+          <label>Ad Soyad<input placeholder="Adınız" /></label>
+          <label>E-posta<input placeholder="email@ornek.com" type="email" /></label>
+          <label>Mesaj<textarea placeholder="Mesajınız" rows={6} /></label>
+          <button className="btn btn-primary" type="submit">Gönder</button>
+          <p className="help">Bu sürüm mock'tur: Form verileri yalnızca tarayıcıda saklanır.</p>
+        </form>
+
+        <div className="card contact-card">
+          <h4>Doğrudan İletişim</h4>
+          <p><span className="ico mail" /> <a href="mailto:burakdevli2@gmail.com">burakdevli2@gmail.com</a></p>
+          <p><span className="ico phone" /> 0533 136 00 59</p>
+          <p><span className="ico in" /> <a href="https://www.linkedin.com/in/burak-devli" target="_blank" rel="noreferrer">LinkedIn Profilim</a></p>
+        </div>
       </div>
     </section>
   );
@@ -195,15 +246,14 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-inner">
-        <span>© {new Date().getFullYear()} Burak Devli</span>
-        <a
-          href={CV_URL}
-          download
-          className="footer-link"
-          title="CV’yi indir"
-        >
-          CV (PDF)
-        </a>
+        <span>© {new Date().getFullYear()} Burak Devli. Tüm hakları saklıdır.</span>
+        <div className="footer-links">
+          <a href="mailto:burakdevli2@gmail.com">E-posta</a>
+          <span>•</span>
+          <a href="tel:+905331360059">Telefon</a>
+          <span>•</span>
+          <a href="https://www.linkedin.com/in/burak-devli" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
       </div>
     </footer>
   );
@@ -215,9 +265,9 @@ export default function App() {
       <Navbar />
       <Hero />
       <About />
-      <Skills />
       <Experience />
       <Education />
+      <Certifications />
       <Contact />
       <Footer />
     </>
