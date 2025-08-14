@@ -64,12 +64,12 @@ export const EXPERIENCE = [
   },
 ];
 
-// Mock - kullanıcı güncelleyecek
+// Güncel Eğitim Bilgisi
 export const EDUCATION = [
   {
-    school: "[Mock] Üniversite Bilgisi",
-    degree: "[Mock] Makine Mühendisliği",
-    year: "[Mock] Mezuniyet Yılı",
+    school: "Trakya Üniversitesi",
+    degree: "Makine Mühendisliği",
+    year: "2024",
   },
 ];
 
