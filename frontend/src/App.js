@@ -1,8 +1,7 @@
-// frontend/src/App.js
 import { useState } from "react";
 import "./App.css";
 
-/** public/ klasöründeki statik dosyalar */
+/* public/ içindeki statik dosyalar */
 const PHOTO         = process.env.PUBLIC_URL + "/FGS_2955.jpg";
 const CV_URL        = process.env.PUBLIC_URL + "/BURAK_DEVLI_CV.pdf";
 const PORTFOLIO_PDF = process.env.PUBLIC_URL + "/Portfolyo.pdf";
@@ -26,8 +25,11 @@ function Navbar() {
 
         {/* Masaüstü menü */}
         <nav className="links">
-          {links.map(l => <a key={l.href} href={l.href}>{l.label}</a>)}
-          <a className="btn btn-primary btn-small" href={CV_URL} download>
+          {links.map((l) => (
+            <a key={l.href} href={l.href}>{l.label}</a>
+          ))}
+          {/* target+download: mobil tarayıcı uyumluluğu */}
+          <a className="btn btn-primary btn-small" href={CV_URL} target="_blank" rel="noreferrer" download>
             CV’yi indir
           </a>
         </nav>
@@ -36,7 +38,7 @@ function Navbar() {
         <button
           className="hamburger"
           aria-label="Menü"
-          onClick={() => setOpen(v => !v)}
+          onClick={() => setOpen((v) => !v)}
         >
           <span /><span /><span />
         </button>
@@ -45,7 +47,7 @@ function Navbar() {
       {/* Mobil çekmece */}
       {open && (
         <div className="drawer">
-          {links.map(l => (
+          {links.map((l) => (
             <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
               {l.label}
             </a>
@@ -53,6 +55,8 @@ function Navbar() {
           <a
             className="btn btn-primary drawer-btn"
             href={CV_URL}
+            target="_blank"
+            rel="noreferrer"
             download
             onClick={() => setOpen(false)}
           >
@@ -84,7 +88,9 @@ function Hero() {
           standartlarında verimlilik artışı sağlarım.
         </p>
         <div className="cta">
-          <a className="btn btn-primary" href={CV_URL} download>CV’yi İndir</a>
+          <a className="btn btn-primary" href={CV_URL} target="_blank" rel="noreferrer" download>
+            CV’yi İndir
+          </a>
           <a className="btn btn-outline" href="#contact">İletişime Geç</a>
         </div>
       </div>
@@ -92,7 +98,7 @@ function Hero() {
   );
 }
 
-/* ----------------------- Küçük başlık etiketi ----------------------- */
+/* ----------------------- Küçük başlık ----------------------- */
 const Eyebrow = ({ children }) => <div className="eyebrow">{children}</div>;
 
 /* ------------------------- HAKKIMDA + SKILLS ------------------------- */
@@ -124,7 +130,7 @@ function About() {
       </div>
 
       <div className="skills-grid">
-        {skills.map(s => (
+        {skills.map((s) => (
           <div className="skill" key={s.label}>
             <span className={`ico ${s.icon}`} aria-hidden />
             <span>{s.label}</span>
@@ -180,13 +186,13 @@ function Experience() {
       <h2>İş Tecrübeleri</h2>
 
       <div className="timeline">
-        {items.map(it => (
+        {items.map((it) => (
           <article className="tl-item" key={it.company + it.period}>
             <div className="tl-dot" />
             <div className="tl-card">
               <h3 className="tl-title">{it.company}</h3>
               <p className="tl-sub">{it.period} · {it.role}</p>
-              <ul>{it.bullets.map(b => <li key={b}>{b}</li>)}</ul>
+              <ul>{it.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
             </div>
           </article>
         ))}
@@ -204,7 +210,7 @@ function Portfolio() {
 
       <div className="portfolio-grid">
         <figure className="portfolio-card">
-          {/* PDF gömme + erişilebilir yedek metin */}
+          {/* Mobil tarayıcı PDF gösteremeyebilir — alttaki butonlar her zaman var */}
           <object data={PORTFOLIO_PDF} type="application/pdf" className="portfolio-embed">
             <p style={{ padding: "12px" }}>
               Tarayıcınız PDF görüntüleyemiyor.{" "}
@@ -220,7 +226,7 @@ function Portfolio() {
               <a className="btn btn-outline" href={PORTFOLIO_PDF} target="_blank" rel="noreferrer">
                 Büyüt
               </a>
-              <a className="btn btn-primary" href={PORTFOLIO_PDF} download>
+              <a className="btn btn-primary" href={PORTFOLIO_PDF} target="_blank" rel="noreferrer" download>
                 İndir (PDF)
               </a>
             </div>
