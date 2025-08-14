@@ -5,7 +5,7 @@ import "./App.css";
 /** Statik varlık yolları (GitHub Pages alt dizini için güvenli) */
 const PHOTO = process.env.PUBLIC_URL + "/FGS_2955.jpg";
 const CV_URL = process.env.PUBLIC_URL + "/BURAK_DEVLI_CV.pdf";
-const PORTFOLIO_IMG = process.env.PUBLIC_URL + "/portfolyo-belgesi.jpg";
+const PORTFOLIO_PDF = process.env.PUBLIC_URL + "/Portfolyo.pdf";
 
 /** ----------------------- NAVBAR ----------------------- */
 function Navbar() {
