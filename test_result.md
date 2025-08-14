@@ -152,11 +152,14 @@
 ##     file: "/app/frontend/src/mock/mock.js"
 ##     stuck_count: 0
 ##     priority: "high"
-##     needs_retesting: true
+##     needs_retesting: false
 ##     status_history:
 ##         -working: true
 ##         -agent: "main"
 ##         -comment: "Updated cvUrl to new artifact URL."
+##         -working: true
+##         -agent: "testing"
+##         -comment: "Both header and hero CV download buttons working correctly. Both open https://customer-assets.emergentagent.com/job_engineer-portfolio-2/artifacts/x0jqc52h_BURAK%20DEVL%C4%B0__CV.pdf in new tab (_blank target)."
 ##   - task: "Contact form mock localStorage + toast"
 ##     implemented: true
 ##     working: true
