@@ -205,9 +205,7 @@
 
 ## test_plan:
 ##   current_focus:
-##     - "Backend: POST /api/contact saves to Mongo without email (status=new)"
-##     - "Frontend: Contact form sends request and shows success toast"
-##     - "Frontend: Portfolio section renders inline viewer (fallback to image since current asset is JPG)"
+##     - "All frontend UI tests completed successfully"
 ##   stuck_tasks: []
 ##   test_all: false
 ##   test_priority: "high_first"
