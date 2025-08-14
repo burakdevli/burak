@@ -174,6 +174,17 @@
 ##         -working: true
 ##         -agent: "testing"
 ##         -comment: "Contact form tested successfully. Form submission sends POST request to ${REACT_APP_BACKEND_URL}/api/contact with 201 response. Success toast 'Mesaj gönderildi' appears correctly. Form fields (Ad Soyad, E-posta, Mesaj) work properly. No localStorage writes detected as expected. Backend integration working perfectly."
+##   - task: "CV link functionality"
+##     implemented: true
+##     working: true
+##     file: "/app/frontend/src/pages/Home.jsx"
+##     stuck_count: 0
+##     priority: "medium"
+##     needs_retesting: false
+##     status_history:
+##         -working: true
+##         -agent: "testing"
+##         -comment: "CV link tested successfully. Link opens latest PDF (x0jqc52h_BURAK DEVLİ__CV.pdf) in new tab with target='_blank' as expected. Both header and hero section CV links working properly."
 ##   - task: "Certification text updated"
 ##     implemented: true
 ##     working: true
