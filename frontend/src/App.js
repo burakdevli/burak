@@ -19,39 +19,38 @@ function Navbar() {
     { href: "#contact", label: "İletişim" },
   ];
 
+  function Portfolio() {
   return (
-    <header className="nav">
-      <div className="container nav-inner">
-        <a href="#top" className="brand">Burak Devli</a>
+    <section id="portfolio" className="container section">
+      <div className="eyebrow">PORTFOLYO</div>
+      <h2>Çalışma & Referans Belgeleri</h2>
 
-        {/* Masaüstü bağlantıları */}
-        <nav className="links">
-          {links.map((l) => (
-            <a key={l.href} href={l.href}>{l.label}</a>
-          ))}
-          <a className="btn btn-primary btn-small" href={CV_URL} download>
-            CV’yi indir
-          </a>
-        </nav>
+      <div className="portfolio-grid">
+        <figure className="portfolio-card">
+          {/* PDF gömme */}
+          <object
+            data={PORTFOLIO_PDF}
+            type="application/pdf"
+            className="portfolio-embed"
+          >
+            <p style={{padding:"12px"}}>
+              Tarayıcınız PDF görüntüleyemiyor.{" "}
+              <a href={PORTFOLIO_PDF} target="_blank" rel="noreferrer">PDF’i aç</a> veya{" "}
+              <a href={PORTFOLIO_PDF} download>indir</a>.
+            </p>
+          </object>
 
-        {/* Mobil hamburger */}
-        <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Menüyü aç/kapat">
-          <span /><span /><span />
-        </button>
+          <figcaption className="portfolio-meta">
+            <div className="title">Görev ve Sorumluluk Beyanı</div>
+            <div className="sub">Foça Bakım Onarım ve İstihkam Komutanlığı</div>
+            <div className="actions">
+              <a className="btn btn-outline" href={PORTFOLIO_PDF} target="_blank" rel="noreferrer">Büyüt</a>
+              <a className="btn btn-primary" href={PORTFOLIO_PDF} download>İndir (PDF)</a>
+            </div>
+          </figcaption>
+        </figure>
       </div>
-
-      {/* Mobil çekmece */}
-      {open && (
-        <div className="drawer">
-          {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
-          ))}
-          <a className="btn btn-primary drawer-btn" href={CV_URL} download onClick={() => setOpen(false)}>
-            CV’yi indir
-          </a>
-        </div>
-      )}
-    </header>
+    </section>
   );
 }
 
