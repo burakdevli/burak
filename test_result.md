@@ -149,11 +149,14 @@
 ##     file: "/app/frontend/src/components/PortfolioCard.jsx"
 ##     stuck_count: 0
 ##     priority: "medium"
-##     needs_retesting: true
+##     needs_retesting: false
 ##     status_history:
 ##         -working: true
 ##         -agent: "main"
 ##         -comment: "Inline viewer uses <object> for PDFs, falls back to image for JPG."
+##         -working: true
+##         -agent: "testing"
+##         -comment: "Portfolio inline viewer tested successfully. JPG image renders correctly in inline viewer. 'Büyüt' modal functionality working - larger image appears when clicked. Current asset (huqa597e_Portfolyo.jpg) displays properly as image container, not PDF object as expected."
 ##   - task: "Contact form uses backend (POST /api/contact)"
 ##     implemented: true
 ##     working: true
