@@ -138,6 +138,7 @@ export default function Home() {
               <a href="#about" className="text-sm">Hakkımda</a>
               <a href="#experience" className="text-sm">Deneyim</a>
               <a href="#education" className="text-sm">Eğitim</a>
+              <a href="#languages" className="text-sm">Dil & Sertifikalar</a>
               <a href="#contact" className="text-sm">İletişim</a>
               <a href={PROFILE.cvUrl} target="_blank" rel="noopener" className="inline-flex">
                 <Button className="rounded-none bg-[#1E3A8A] text-white hover:bg-[#1b3579] w-full">CV'yi İndir</Button>
