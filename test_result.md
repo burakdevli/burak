@@ -101,3 +101,83 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+## user_problem_statement: "Portfolio sitesi: Kurumsal mavi-gri tema, deneyim timeline, eğitim, iletişim formu (mock), Dil & Sertifikalar menüde."
+
+## backend:
+##   - task: "Status API (template)"
+##     implemented: true
+##     working: true
+##     file: "/app/backend/server.py"
+##     stuck_count: 0
+##     priority: "low"
+##     needs_retesting: false
+##     status_history:
+##         -working: true
+##         -agent: "main"
+##         -comment: "Template backend up; not used by frontend yet."
+
+## frontend:
+##   - task: "Navbar navigation including Dil & Sertifikalar"
+##     implemented: true
+##     working: true
+##     file: "/app/frontend/src/pages/Home.jsx"
+##     stuck_count: 0
+##     priority: "high"
+##     needs_retesting: true
+##     status_history:
+##         -working: true
+##         -agent: "main"
+##         -comment: "Added menu link to #languages; mobile + desktop."
+##   - task: "Timeline thickness update"
+##     implemented: true
+##     working: true
+##     file: "/app/frontend/src/pages/Home.jsx"
+##     stuck_count: 0
+##     priority: "medium"
+##     needs_retesting: true
+##     status_history:
+##         -working: true
+##         -agent: "main"
+##         -comment: "Made vertical line w-1 and slightly darker."
+##   - task: "CV download button opens latest PDF"
+##     implemented: true
+##     working: true
+##     file: "/app/frontend/src/mock/mock.js"
+##     stuck_count: 0
+##     priority: "high"
+##     needs_retesting: true
+##     status_history:
+##         -working: true
+##         -agent: "main"
+##         -comment: "Updated cvUrl to new artifact URL."
+##   - task: "Contact form mock localStorage + toast"
+##     implemented: true
+##     working: true
+##     file: "/app/frontend/src/pages/Home.jsx"
+##     stuck_count: 0
+##     priority: "high"
+##     needs_retesting: true
+##     status_history:
+##         -working: true
+##         -agent: "main"
+##         -comment: "Form saves to localStorage; shows toast via shadcn hook."
+
+## metadata:
+##   created_by: "main_agent"
+##   version: "1.0"
+##   test_sequence: 1
+##   run_ui: true
+
+## test_plan:
+##   current_focus:
+##     - "Navbar navigation including Dil & Sertifikalar"
+##     - "CV download works (opens correct URL in new tab)"
+##     - "Contact form mock: save, reset, toast visible"
+##   stuck_tasks: []
+##   test_all: false
+##   test_priority: "high_first"
+
+## agent_communication:
+##     -agent: "main"
+##     -message: "Please run UI tests for navbar anchors, CV download link, and contact form mock flow. Ignore PostHog/ws console errors (dev env)."
