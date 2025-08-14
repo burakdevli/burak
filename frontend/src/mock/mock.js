@@ -7,7 +7,7 @@ export const PROFILE = {
   photoUrl:
     "https://customer-assets.emergentagent.com/job_a5b918d4-7b4f-4e81-afc3-c8af2006a94f/artifacts/wfz82tnd_FGS_2955.jpg",
   cvUrl:
-    "https://customer-assets.emergentagent.com/job_a5b918d4-7b4f-4e81-afc3-c8af2006a94f/artifacts/b14c4m92_BURAK%20DEVL%C4%B0__CV.pdf",
+    "https://customer-assets.emergentagent.com/job_engineer-portfolio-2/artifacts/x0jqc52h_BURAK%20DEVL%C4%B0__CV.pdf",
   email: "burakdevli2@gmail.com",
   phone: "0533 136 00 59",
   linkedin: "https://www.linkedin.com/in/burak-devli",
