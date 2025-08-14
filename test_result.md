@@ -116,6 +116,17 @@
 ##         -working: true
 ##         -agent: "main"
 ##         -comment: "Template backend up; not used by frontend yet."
+##   - task: "Create contact + email via SendGrid"
+##     implemented: true
+##     working: true
+##     file: "/app/backend/server.py"
+##     stuck_count: 0
+##     priority: "high"
+##     needs_retesting: true
+##     status_history:
+##         -working: true
+##         -agent: "main"
+##         -comment: "Implemented POST/GET /api/contact, Mongo save and optional SendGrid email (env-based)."
 
 ## frontend:
 ##   - task: "Navbar navigation including Dil & Sertifikalar"
