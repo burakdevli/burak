@@ -79,3 +79,12 @@ export const CERTIFICATIONS = [
 export const LANGUAGES = [
   { name: "İngilizce", level: "B2" },
 ];
+
+export const PORTFOLIO = [
+  {
+    title: "Görev ve Sorumluluk Belgesi",
+    description: "Foça Bakım Onarım ve İstihkam Komutanlığı – Proje ve saha sorumluluklarının özetlendiği resmi yazı.",
+    imageUrl:
+      "https://customer-assets.emergentagent.com/job_engineer-portfolio-2/artifacts/huqa597e_Portfolyo.jpg",
+  },
+];

@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { PROFILE, SKILLS, EXPERIENCE, EDUCATION, CERTIFICATIONS, LANGUAGES } from "../mock/mock";
+import { PROFILE, SKILLS, EXPERIENCE, EDUCATION, CERTIFICATIONS, LANGUAGES, PORTFOLIO } from "../mock/mock";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
 import { useToast } from "../hooks/use-toast";
+import PortfolioCard from "../components/PortfolioCard";
 import {
   ClipboardList,
   Wrench,
@@ -119,6 +120,7 @@ export default function Home() {
           <nav className="hidden md:flex items-center gap-6">
             <a className="text-xs text-gray-700 hover:text-[#1E3A8A]" href="#about">Hakkımda</a>
             <a className="text-xs text-gray-700 hover:text-[#1E3A8A]" href="#experience">Deneyim</a>
+            <a className="text-xs text-gray-700 hover:text-[#1E3A8A]" href="#portfolio">Portfolyo</a>
             <a className="text-xs text-gray-700 hover:text-[#1E3A8A]" href="#education">Eğitim</a>
             <a className="text-xs text-gray-700 hover:text-[#1E3A8A]" href="#languages">Dil & Sertifikalar</a>
             <a className="text-xs text-gray-700 hover:text-[#1E3A8A]" href="#contact">İletişim</a>
@@ -137,6 +139,7 @@ export default function Home() {
             <div className="px-4 py-3 flex flex-col gap-2">
               <a href="#about" className="text-sm">Hakkımda</a>
               <a href="#experience" className="text-sm">Deneyim</a>
+              <a href="#portfolio" className="text-sm">Portfolyo</a>
               <a href="#education" className="text-sm">Eğitim</a>
               <a href="#languages" className="text-sm">Dil & Sertifikalar</a>
               <a href="#contact" className="text-sm">İletişim</a>
@@ -213,6 +216,16 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Portfolio */}
+      <section id="portfolio" className="max-w-6xl mx-auto px-4 py-6 md:py-10">
+        <SectionHeader label="Portfolyo" title="Belgeler ve Çalışmalar" />
+        <div className="grid md:grid-cols-2 gap-6">
+          {PORTFOLIO.map((p, i) => (
+            <PortfolioCard key={i} item={p} />
+          ))}
+        </div>
+      </section>
+
       {/* Education Only */}
       <section id="education" className="max-w-6xl mx-auto px-4 py-6 md:py-10">
         <SectionHeader label="Eğitim" title="Akademik Arka Plan" />
@@ -232,7 +245,7 @@ export default function Home() {
         </Card>
       </section>
 
-      {/* Languages & Certifications - Separate Section */}
+      {/* Languages & Certifications */}
       <section id="languages" className="max-w-6xl mx-auto px-4 py-6 md:py-10">
         <SectionHeader label="Dil & Sertifikalar" title="Yetkinlikler" />
         <div className="grid md:grid-cols-2 gap-6">
