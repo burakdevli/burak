@@ -138,11 +138,14 @@
 ##     file: "/app/frontend/src/pages/Home.jsx"
 ##     stuck_count: 0
 ##     priority: "medium"
-##     needs_retesting: true
+##     needs_retesting: false
 ##     status_history:
 ##         -working: true
 ##         -agent: "main"
 ##         -comment: "Made vertical line w-1 and slightly darker."
+##         -working: true
+##         -agent: "testing"
+##         -comment: "Timeline vertical line confirmed to have w-1 class (4px width) and is visible in #experience section."
 ##   - task: "CV download button opens latest PDF"
 ##     implemented: true
 ##     working: true
