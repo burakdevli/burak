@@ -56,7 +56,7 @@ const COPY = {
       ],
     },
     summaryText:
-      "Bakım, onarım ve yangın güvenliği projelerinde saha deneyimi yüksek bir makine mühendisiyim. Analitik, detay odaklı ve ekip uyumluyum; kriz anlarında hızlı aksiyon alırım. Mühendis teğmen olarak yoğun saha bakım-onarım faaliyetlerinde teknik liderlik yaptım.",
+      "Bakım, onarım ve yangın güvenliği projelerinde saha deneyimi yüksek bir makine mühendisiyim. Analitik, detay odaklı ve ekip uyumluyum; kriz anlarında hızlı aksiyon alırım. Mühendis Teğmen olarak yoğun saha bakım-onarım faaliyetlerinde teknik liderlik yaptım.",
     exp: [
       {
         company: "Foça Bakım Onarım ve İstihkam Komutanlığı",
