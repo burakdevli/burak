@@ -4,7 +4,7 @@ import "./App.css";
 
 /* ---------- Statik dosyalar (public) ---------- */
 const PHOTO = process.env.PUBLIC_URL + "/FGS_2955.jpg";
-const CV_URL = process.env.PUBLIC_URL + "/Tabanca Mekaniği ve Ateşleme Tertibatı.pptx"; // TR ve EN'de aynı dosya indirilecek
+const CV_URL = process.env.PUBLIC_URL + "/Tabanca Mekaniği ve Ateşleme Tertibatı.pdf"; // TR ve EN'de aynı dosya indirilecek
 const PORTFOLIO_IMG = process.env.PUBLIC_URL + "/Portfolio.jpg";
 
 /* ---------- Metinler (TR/EN) ---------- */
